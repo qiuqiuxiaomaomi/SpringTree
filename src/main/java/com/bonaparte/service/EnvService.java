@@ -2,7 +2,9 @@ package com.bonaparte.service;
 
 import org.springframework.stereotype.Service;
 
+import java.lang.management.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -26,5 +28,37 @@ public class EnvService {
             System.out.println(map);
         }
         return properties;
+    }
+
+    public Object getJvmConfig(){
+        //获取堆栈信息
+        MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
+        System.out.println("-------memoryMXBean-------");
+        System.out.println(memoryMXBean);
+        //
+        List<String> map =ManagementFactory.getRuntimeMXBean().getInputArguments();
+        System.out.println("-------runtimeMXBean-------");
+        System.out.println(map);
+        //获取运行时状态
+        Runtime runtime = Runtime.getRuntime();
+        System.out.println("-------runtime-------");
+        System.out.println(runtime);
+        // 获取线程情况
+        ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
+        System.out.println("-------threadMXBean-------");
+        System.out.println(threadMXBean);
+        // 获取加载器信息
+        ClassLoadingMXBean classLoadingMXBean =ManagementFactory.getClassLoadingMXBean();
+        System.out.println("-------classLoadingMXBean-------");
+        System.out.println(classLoadingMXBean);
+        // 获取GC回收情况
+        List<GarbageCollectorMXBean> garbageCollectorMXBeans =ManagementFactory.getGarbageCollectorMXBeans();
+        System.out.println("-------garbageCollectorMXBeans-------");
+        System.out.println(garbageCollectorMXBeans);
+        // 获取线程池信息
+        List<MemoryPoolMXBean> memoryPoolMXBeans =ManagementFactory.getMemoryPoolMXBeans();
+        System.out.println("-------memoryPoolMXBeans-------");
+        System.out.println(memoryPoolMXBeans);
+        return memoryMXBean;
     }
 }

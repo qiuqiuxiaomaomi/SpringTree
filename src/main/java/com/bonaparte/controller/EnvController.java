@@ -27,4 +27,14 @@ public class EnvController {
         Properties properties = envService.getSystemProperty();
         return properties;
     }
+
+    @ApiOperation(value = "jvm变量详情接口",notes = "返回jvm变量详情",httpMethod = "GET")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200,message = "返回jvm变量详情")
+    })
+    @RequestMapping("/jvmdetail")
+    public Object getEnvJvmObject(){
+        Object jvmObject = envService.getJvmConfig();
+        return jvmObject;
+    }
 }
