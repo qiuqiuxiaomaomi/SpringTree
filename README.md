@@ -2,14 +2,17 @@
 
 <pre>
 springboot
-mybatis,
-mysql,
-zookeeper,
-mongodb,
-kafka,
-rocketmq,
-memcached,
+mybatis
+mysql
+zookeeper
+mongodb
+kafka
+rocketmq
+memcached
 es
+lamda
+fork/join
+ThreadPool
 微信支付
 </pre>
 
