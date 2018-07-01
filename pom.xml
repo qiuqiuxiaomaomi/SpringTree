@@ -57,6 +57,9 @@
         <pinyin4j.version>2.5.0</pinyin4j.version>
         <!--excel 导入导出 -->
         <easypoi.version>2.4.0</easypoi.version>
+        <mongo-java-driver.version>3.2.2</mongo-java-driver.version>
+        <spring-data-mongodb.version>1.9.2.RELEASE</spring-data-mongodb.version>
+        <spring-data-mongodb-cross-store.version>1.9.2.RELEASE</spring-data-mongodb-cross-store.version>
 
         <!--   MyBatis Generator   -->
         <!--   Java接口和实体类   -->
@@ -285,6 +288,35 @@
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
             <version>3.4.8</version>
+        </dependency>
+
+        <!-- MongoDB -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>${mongo-java-driver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>${spring-data-mongodb.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb-cross-store</artifactId>
+            <version>${spring-data-mongodb-cross-store.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl-over-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <build>
