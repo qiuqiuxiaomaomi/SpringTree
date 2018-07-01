@@ -57,7 +57,7 @@ public class LamdaProgramService {
                 .distinct()
                 .collect(Collectors.toList());
         //查找满足条件的数据
-        Charge charge = new Charge();
+        Charge charge = new Charge(1,234.0);
         list1.stream()
                 .findFirst()
                 .equals(charge);
@@ -76,7 +76,7 @@ public class LamdaProgramService {
         List<Charge> chargeList = new ArrayList<>();
         IntStream.range(0,10)
                 .forEach(x ->{
-                    Charge chargeTemp = new Charge();
+                    Charge chargeTemp = new Charge(1, 12.0);
                     chargeTemp.setMoney((double) x);
                     chargeList.add(chargeTemp);
                 });

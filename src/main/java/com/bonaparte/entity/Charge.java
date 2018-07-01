@@ -261,4 +261,24 @@ public class Charge {
     public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
+
+    public Charge(String name, Double money, Date ctime, Date utime, Integer status, String chargeTime, String transactionId, Integer type, Integer uid, String description, String orderId, String openId) {
+        this.name = name;
+        this.money = money;
+        this.ctime = ctime;
+        this.utime = utime;
+        this.status = status;
+        this.chargeTime = chargeTime;
+        this.transactionId = transactionId;
+        this.type = type;
+        this.uid = uid;
+        this.description = description;
+        this.orderId = orderId;
+        this.openId = openId;
+    }
+
+    public Charge(Integer uid, Double money) {
+        this.uid = uid;
+        this.money = money;
+    }
 }
