@@ -58,6 +58,21 @@ public class MongoSeniorService {
             dbCollection.createIndex(new BasicDBObject("money", 1));
             dbCollection.getIndexInfo();
             //dbCollection.aggregate()
+            DBObject dbObject1 = new BasicDBObject();
+            dbObject1.put("status", 1);
+            dbCollection.distinct("money", dbObject1);
+            dbObject1.put("status", 2);
+            dbCollection.findAndRemove(dbObject1);
+            db.collectionExists(CHARGEINFO);
+            //创建固定集合
+            DBObject dbObject2 = new BasicDBObject();
+            dbObject2.put("capped",true);
+            dbObject2.put("size", 1024);
+            dbObject2.put("max", 1024);
+            db.createCollection(CHARGEINFO, dbObject2);
+            //
+            db.getReadPreference();
+            db.getCollectionNames();
         } catch (Exception e) {
             System.out.println("插入mongodb数据");
         }
