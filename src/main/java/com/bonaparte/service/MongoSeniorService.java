@@ -3,14 +3,15 @@ package com.bonaparte.service;
 import com.bonaparte.entity.Charge;
 import com.bonaparte.util.BeanUtil;
 import com.bonaparte.util.MongoDao;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.connection.QueryResult;
+import com.mongodb.*;
+import com.mongodb.gridfs.GridFS;
+import com.mongodb.gridfs.GridFSDBFile;
+import com.mongodb.gridfs.GridFSInputFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Map;
 
 /**
@@ -22,10 +23,14 @@ public class MongoSeniorService {
     @Autowired
     private MongoDao mongoDao;
 
+    public static GridFS gfs = null;
+
+    String file = "src/main/resources/20180413153203.jpg";
+
     public static final String CHARGEINFO = "chargeinfo";
 
-    public void testMongo(){
-        Charge charge = new Charge(1,100.0);
+    public void testMongo() {
+        Charge charge = new Charge(1, 100.0);
         try {
             Map<String, Object> map = BeanUtil.objectToMap(charge);
             mongoDao.save(CHARGEINFO, map);
@@ -33,7 +38,8 @@ public class MongoSeniorService {
             DB db = mongoDao.getMongoTemplate().getDb();
             DBObject query = new BasicDBObject();
             DBObject orderBy = new BasicDBObject();
-            query.put("speclibId", 1);;
+            query.put("speclibId", 1);
+            ;
             orderBy.put("ctime", -1);
             DBCursor dbCursor = db.getCollection(CHARGEINFO).find(query);
             dbCursor.sort(orderBy);
@@ -42,8 +48,62 @@ public class MongoSeniorService {
             while (dbCursor.hasNext()) {
                 DBObject row = dbCursor.next();
             }
-        }catch (Exception e){
+
+            //
+            gfs = new GridFS(db);
+            save(new FileInputStream(file), "20180413153203.jpg", "20180413153203.jpg");
+
+            //
+            DBCollection dbCollection = db.getCollection(CHARGEINFO);
+            dbCollection.createIndex(new BasicDBObject("money", 1));
+            dbCollection.getIndexInfo();
+            //dbCollection.aggregate()
+        } catch (Exception e) {
             System.out.println("插入mongodb数据");
         }
     }
+
+    /**
+     * 用给出的id，保存文件，透明处理已存在的情况
+     * id 可以是string，long，int，org.bson.types.ObjectId 类型
+     *
+     * @param in
+     * @param id
+     */
+    public static void save(InputStream in, Object id, String fileName) {
+        DBObject query = new BasicDBObject("_id", id);
+        GridFSDBFile gridFSDBFile = gfs.findOne(query);
+        if (gridFSDBFile == null) {
+            GridFSInputFile gridFSInputFile = gfs.createFile(in);
+            gridFSInputFile.setId(id);
+            gridFSInputFile.setFilename(fileName);
+            gridFSInputFile.save();
+        }
+    }
+
+    /**
+     * 据id返回文件
+     *
+     * @param id
+     * @return
+     */
+    public static GridFSDBFile getById(Object id) {
+        DBObject query = new BasicDBObject("_id", id);
+        GridFSDBFile gridFSDBFile = gfs.findOne(query);
+        return gridFSDBFile;
+    }
+
+    /**
+     * 据文件名返回文件，只返回第一个
+     *
+     * @param fileName
+     * @return
+     */
+    public static GridFSDBFile getByFileName(String fileName) {
+        DBObject query = new BasicDBObject("filename", fileName);
+        GridFSDBFile gridFSDBFile = gfs.findOne(query);
+        return gridFSDBFile;
+    }
+
+
 }
