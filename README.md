@@ -30,3 +30,6 @@ ThreadPool
         zookeeper
 ### 8:mongodb
      文档数据库
+     基础查询
+     保存数据到磁盘
+     创建索引等
