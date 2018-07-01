@@ -2,12 +2,15 @@ package com.bonaparte.service;
 
 import com.bonaparte.dao.mapper.ChargeMapper;
 import com.bonaparte.entity.Charge;
+import org.apache.commons.lang.math.IntRange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -68,5 +71,14 @@ public class LamdaProgramService {
         list1.stream()
                 .sorted(Comparator.comparing(x->x.getMoney()))
                 .collect(Collectors.toList());
+
+        //Stream创建对象
+        List<Charge> chargeList = new ArrayList<>();
+        IntStream.range(0,10)
+                .forEach(x ->{
+                    Charge chargeTemp = new Charge();
+                    chargeTemp.setMoney((double) x);
+                    chargeList.add(chargeTemp);
+                });
     }
 }
