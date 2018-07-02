@@ -33,3 +33,5 @@ ThreadPool
      基础查询
      保存数据到磁盘
      创建索引等
+### 9:synchronized
+     临界区间
