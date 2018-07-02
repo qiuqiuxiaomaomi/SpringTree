@@ -25,13 +25,14 @@ public class JsonUtil {
                 keySet.addAll(json2.keySet());
             }
 
-            for (String key : keySet) {
-                if (null != json1 && json1.containsKey(key)) {
-                    merged.put(key, json1.get(key));
-                } else if (null != json2 && json2.containsKey(key)) {
-                    merged.put(key, json2.get(key));
-                }
-            }
+            keySet.stream()
+                    .forEach(key->{
+                        if (null != json1 && json1.containsKey(key)) {
+                            merged.put(key, json1.get(key));
+                        } else if (null != json2 && json2.containsKey(key)) {
+                            merged.put(key, json2.get(key));
+                        }
+                    });
         } catch (JSONException e) {
             log.error("JsonUtil merge error, msg:" + e.getMessage(), e);
         }
