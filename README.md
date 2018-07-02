@@ -33,3 +33,9 @@ ThreadPool
      基础查询
      保存数据到磁盘
      创建索引等
+### 9:synchronized
+     临界区间
+### 10:Transactional事务
+     事务的传播属性
+     事务的隔离级别
+     事务的回滚策略     
