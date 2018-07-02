@@ -1,10 +1,12 @@
 package com.bonaparte.service;
 
+import com.bonaparte.dao.mapper.ChargeMapper;
 import com.bonaparte.entity.Charge;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.RateLimiter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
 public class GuavaSeniorService {
     private final static Log log = LogFactory.getLog(GuavaSeniorService.class);
     RateLimiter rateLimiter = RateLimiter.create(10.0);
+    @Autowired
+    private ChargeMapper chargeMapper;
 
     /**
      * 限流，该函数每秒最多调用10次
