@@ -61,5 +61,11 @@ public class RedisSeniorService {
         jedis.sadd("set1", "qiuqiu", "xiaomaomi", "watchdog");
 
         //Zset 基本操作
+        jedis.zadd("zset", 3.0, "zfeild1");
+        jedis.zadd("zset", 2.0, "zfeild2");
+        jedis.zadd("zset", 5.0, "zfeild3");
+        jedis.zrange("zset", 0, -1);
+        jedis.zcard("zset");
+        jedis.zscore("zset", "zfeild1");
     }
 }
