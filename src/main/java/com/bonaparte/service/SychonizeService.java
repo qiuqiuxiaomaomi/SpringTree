@@ -1,11 +1,13 @@
 package com.bonaparte.service;
 
-import com.bonaparte.entity.Charge;
 import org.springframework.stereotype.Service;
 
 /**
  * Created by yangmingquan on 2018/7/1.
  * 同步机制与lock
+ * 当前 synchronized只支持
+ *                1：修饰方法，
+ *                2：修饰代码块
  */
 @Service
 public class SychonizeService {
