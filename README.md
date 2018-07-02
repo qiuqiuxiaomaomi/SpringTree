@@ -39,4 +39,5 @@ ThreadPool
      事务的传播属性
      事务的隔离级别
      事务的回滚策略 
-### 11:ThreadLocal提高程序的并发性能     
+### 11:ThreadLocal提高程序的并发性能 
+### 12:Volatile 内存可见性，禁止指令重排序
