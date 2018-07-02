@@ -28,6 +28,23 @@ public class TransactionService {
             chargeMapper.insertSelective(charge);
             // 依赖于第一次数据插入结果的第二次插入
             // TODO
+            saveCharge2(charge);
+        }catch (Exception e){
+            throw new RuntimeException();
+        }
+    }
+
+    /**
+     * 当前函数使用的注解事务
+     * 该事务的回滚策略只支持运行时异常
+     * */
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, rollbackFor = RuntimeException.class)
+    public void saveCharge2(Charge charge){
+        try {
+            // 第一次插入数据
+            chargeMapper.insertSelective(charge);
+            // 依赖于第一次数据插入结果的第二次插入
+            // TODO
         }catch (Exception e){
             throw new RuntimeException();
         }

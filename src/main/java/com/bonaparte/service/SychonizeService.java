@@ -15,7 +15,7 @@ public class SychonizeService {
     public Integer numCount = 1;
 
     /**
-     * 多线程环境下，搞并发环境下
+     * 多线程环境下，高并发环境下
      *   以下两种模式是会影响程序性能的
      * */
     public Integer getSpecChargeCount1(){
