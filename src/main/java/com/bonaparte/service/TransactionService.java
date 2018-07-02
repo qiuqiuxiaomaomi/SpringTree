@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Created by yangmingquan on 2018/6/29.
  * 事物，事物高级功能
+ * 事务的传播属性，事务的隔离属性，事务的回滚机制
  */
 @Service
 public class TransactionService {

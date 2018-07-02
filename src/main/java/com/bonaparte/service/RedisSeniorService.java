@@ -14,6 +14,15 @@ import java.util.Map;
 /**
  * Created by yangmingquan on 2018/6/29.
  * redis高级功能
+ *   String,
+ *   Hash,
+ *   List,
+ *   Set,
+ *   ZSet
+ *   队列，热门数据，微博粉丝，排行榜，粉丝数据订阅
+ *   Redis 输入缓存，输出缓存
+ *   Redis的RDB, AOP机制
+ *   Redis的内存分配机制，数据过期策略，内存回收策略
  */
 @Service
 public class RedisSeniorService {
