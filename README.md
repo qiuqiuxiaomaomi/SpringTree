@@ -38,4 +38,5 @@ ThreadPool
 ### 10:Transactional事务
      事务的传播属性
      事务的隔离级别
-     事务的回滚策略     
+     事务的回滚策略 
+### 11:ThreadLocal提高程序的并发性能     
