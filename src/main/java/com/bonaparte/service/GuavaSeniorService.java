@@ -35,10 +35,10 @@ public class GuavaSeniorService {
                                   Charge charge,
                                   Integer id,
                                   Integer position){
-        Preconditions.checkArgument(flag);
-        Preconditions.checkNotNull(charge);
-        Preconditions.checkNotNull(id);
-        Preconditions.checkNotNull(list);
+        Preconditions.checkState(flag, "flag为空");
+        Preconditions.checkNotNull(charge, "charge为空");
+        Preconditions.checkNotNull(id, "id 为空");
+        Preconditions.checkNotNull(list, "list为空");
         Preconditions.checkElementIndex(position, list.size(), "not null");
     }
 }

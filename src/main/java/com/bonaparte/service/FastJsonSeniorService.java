@@ -6,6 +6,7 @@ import com.bonaparte.dao.mapper.ChargeMapper;
 import com.bonaparte.entity.Charge;
 import com.bonaparte.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * Created by yangmingquan on 2018/6/29.
  * TODO: 研究json的底层代码实现
  */
+@Service
 public class FastJsonSeniorService {
     @Autowired
     private ChargeMapper chargeMapper;
