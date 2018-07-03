@@ -17,8 +17,12 @@ public class HashService {
         map.put("a", 1);
         map.putIfAbsent("b", 1);
 
-        ConcurrentHashMap<String, Object> concurrentHashMap = new ConcurrentHashMap<>();
+        ConcurrentHashMap<String, Integer> concurrentHashMap = new ConcurrentHashMap<>();
         concurrentHashMap.put("a", 1);
         concurrentHashMap.put("b", 2);
+
+        concurrentHashMap.entrySet().forEach(x ->{
+            x.setValue(x.getValue() + 10);
+        });
     }
 }

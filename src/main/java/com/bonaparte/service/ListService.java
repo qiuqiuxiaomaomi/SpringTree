@@ -3,6 +3,7 @@ package com.bonaparte.service;
 import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -21,5 +22,21 @@ public class ListService {
         list1.add(null);
         //ArrayList 查询性能好 插入性能差
         //LinkedList 查询性能差，插入性能好
+
+        List<String> list3 = Lists.newLinkedList();
+        list3.add("a");
+        list3.add("b");
+        list3.add("b");
+        list3.add("c");
+        list3.add("d");
+        list3.add("d");
+        list3.add("e");
+        list3.sort(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o2.compareTo(o1);
+            }
+        });
+        System.out.println(list3);
     }
 }
