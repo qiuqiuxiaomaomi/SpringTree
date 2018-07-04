@@ -1,5 +1,7 @@
 package com.bonaparte.service;
 
+import com.bonaparte.dao.mapper.ChargeMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,4 +10,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MybatisSeniorService {
+    @Autowired
+    private ChargeMapper chargeMapper;
+
+    public void basicOp(){
+        chargeMapper.getAllChargesByUid(1);
+    }
 }
