@@ -3,6 +3,7 @@ package com.bonaparte.service;
 import com.bonaparte.entity.Charge;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.concurrent.*;
  * Created by yangmingquan on 2018/6/29.
  * 多线程编程及高级功能 guava包，并发工具包
  */
+@Service
 public class MultiThreadService {
     public static final Log logger = LogFactory.getLog(MultiThreadService.class);
 
