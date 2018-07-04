@@ -8,4 +8,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RxJavaService {
+
+    public void rxJavaCheck(){
+
+    }
 }
