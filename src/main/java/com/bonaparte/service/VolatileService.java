@@ -8,5 +8,20 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class VolatileService {
+    private volatile int count = 0;
+
+    public void muiltyThread(){
+        for(int i =0; i<10; i++){
+            new Thread(){
+                public void run(){
+                    count++;
+                }
+            }.start();
+        }
+        while(Thread.activeCount() > 1){
+            Thread.yield();
+        }
+        System.out.println(count);
+    }
 
 }

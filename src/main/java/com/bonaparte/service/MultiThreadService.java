@@ -57,4 +57,15 @@ public class MultiThreadService {
                 logger.info(e.getMessage());
             }
         }
+
+        public void ThreadCheck(){
+            int count = Thread.activeCount();
+            System.out.println(Thread.currentThread().getId() + "  "+
+                    Thread.currentThread().getName()+ "  "+
+                    Thread.currentThread().getStackTrace()+ "  "+
+                    Thread.currentThread().getPriority()+ "  "+
+                    Thread.currentThread().getState()+ "  "+
+                    Thread.currentThread().getThreadGroup()
+            );
+        }
 }
