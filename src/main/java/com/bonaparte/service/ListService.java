@@ -1,8 +1,10 @@
 package com.bonaparte.service;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class ListService {
         list3.add("b");
         list3.add("b");
         list3.add("c");
+        list3.add("b");
         list3.add("d");
         list3.add("d");
         list3.add("e");
@@ -38,5 +41,8 @@ public class ListService {
             }
         });
         System.out.println(list3);
+        //洗牌
+        Collections.shuffle(list3);
+        Collections.sort(list3);
     }
 }
