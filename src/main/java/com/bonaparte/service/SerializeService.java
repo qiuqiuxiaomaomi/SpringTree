@@ -1,5 +1,6 @@
 package com.bonaparte.service;
 
+import com.bonaparte.bean.MajorityBean;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,4 +10,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SerializeService {
+
+    public void serializeCheck(){
+        MajorityBean majorityBean = new MajorityBean();
+        majorityBean.setAdress("中国成都");
+        majorityBean.setMajorityName("计算机学院");
+        majorityBean.setStudentCount(65200);
+        majorityBean.setCode("001002003");
+        majorityBean.setUniversityName("四川大学");
+        System.out.println(majorityBean);
+    }
 }
