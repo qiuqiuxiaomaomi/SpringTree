@@ -7,22 +7,23 @@ import org.springframework.context.annotation.Configuration;
  * Created by yangmingquan on 2018/6/29.
  */
 @Configuration
-@ConfigurationProperties(prefix = "memcached")
+@ConfigurationProperties(prefix = "memcache")
 public class MemcachedProps {
-    public String server;
+    public String servers;
     public Integer initConn;
     public Integer minConn;
     public Integer maxConn;
     public Integer maintSleep;
     public boolean nagle;
     public Integer socketTO;
+    public boolean failover;
 
-    public String getServer() {
-        return server;
+    public String getServers() {
+        return servers;
     }
 
-    public void setServer(String server) {
-        this.server = server;
+    public void setServer(String servers) {
+        this.servers = servers;
     }
 
     public Integer getInitConn() {
@@ -71,5 +72,13 @@ public class MemcachedProps {
 
     public void setSocketTO(Integer socketTO) {
         this.socketTO = socketTO;
+    }
+
+    public boolean isFailover() {
+        return failover;
+    }
+
+    public void setFailover(boolean failover) {
+        this.failover = failover;
     }
 }
