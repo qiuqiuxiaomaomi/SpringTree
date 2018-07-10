@@ -6,6 +6,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,12 +31,18 @@ public class LuceneController {
             @ApiResponse(code = 200,message = "")
     })
     @RequestMapping("/info")
-    public Object luceneInfo() throws IOException {
+    public Object luceneInfo() throws IOException, ParseException, InvalidTokenOffsetsException {
         Map<String, Object> map = ControllerUtil.defaultSuccResult();
         luceneService.indexWriter();
         luceneService.queryCheck("成都");
         luceneService.multiQuery();
         luceneService.prefixQuery();
+        luceneService.fuzzyQuery();
+        luceneService.wildcardQuery();
+        luceneService.queryParser();
+        luceneService.multiFieldQueryParse();
+        luceneService.highlighter();
+        luceneService.analyzerCN();
         return map;
     }
 }
