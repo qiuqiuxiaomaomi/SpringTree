@@ -24,5 +24,10 @@ public class MemcachedService {
         Thread.sleep(3000);
         Object b = memCachedClient.get("b");
         System.out.println(b);
+
+        memCachedClient.flushAll();
+
+        b = memCachedClient.get("b");
+        System.out.println(b);
     }
 }
