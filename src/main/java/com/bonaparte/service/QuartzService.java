@@ -7,6 +7,7 @@ import org.quartz.impl.StdScheduler;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.UUID;
 
@@ -107,6 +108,92 @@ public class QuartzService {
 
         } catch (SchedulerException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 重启一个触发器
+     *
+     * @param triggerName
+     * @throws RuntimeException
+     * @throws SchedulerException
+     */
+    public boolean resumeTrigger(String triggerName) throws RuntimeException {
+        if (triggerName == null || "".equals(triggerName)) {
+            return false;
+        }
+        System.out.println(triggerName+":启用");
+        try {
+            this.scheduler.resumeTrigger(new TriggerKey(triggerName, Scheduler.DEFAULT_GROUP));
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+            throw new RuntimeException("重启任务失败");
+        }
+        return true;
+    }
+
+    /**
+     * 删除一个触发器
+     *
+     * @param triggerName
+     * @return
+     * @throws RuntimeException
+     * @throws SchedulerException
+     */
+    public boolean removeTrigger(String triggerName) throws RuntimeException  {
+        try{
+            if (triggerName == null || "".equals(triggerName)) {
+                return false;
+            }
+            this.scheduler.pauseTrigger(new TriggerKey(triggerName, Scheduler.DEFAULT_GROUP));
+            return this.scheduler.unscheduleJob(new TriggerKey(triggerName,
+                    Scheduler.DEFAULT_GROUP));
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+            throw new RuntimeException("删除任务失败");
+        }
+    }
+
+    /**
+     * 暂停一个触发器
+     *
+     * @param triggerName
+     * @throws RuntimeException
+     * @throws SchedulerException
+     */
+    public boolean pauseTrigger(String triggerName) throws RuntimeException  {
+        if (triggerName == null || "".equals(triggerName)) {
+            return false;
+        }
+        System.out.println(triggerName+":禁用");
+        try {
+            this.scheduler.pauseTrigger(new TriggerKey(triggerName, Scheduler.DEFAULT_GROUP));
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+            throw new RuntimeException("禁用任务失败");
+        }
+        return true;
+    }
+
+    /**
+     * 修改触发器的时间
+     *
+     * @param triggerName
+     * @param time
+     * @return
+     * @throws RuntimeException
+     * @throws SchedulerException
+     * @throws ParseException
+     */
+    public boolean modifyJobTime(String triggerName, String time,String taskId) throws RuntimeException{
+        try{
+            this.removeTrigger(triggerName);
+            this.addTrigger(triggerName, time, taskId);
+            System.out.println("修改触发器");
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new RuntimeException("修改任务失败");
         }
     }
 }
