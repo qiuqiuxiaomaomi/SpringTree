@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 /**
  * Created by yangmingquan on 2018/7/10.
+ * Order 用来对AOP的拦截函数添加优先级，数字越小，优先级越高，越先执行
  */
 @Aspect
 @Component
