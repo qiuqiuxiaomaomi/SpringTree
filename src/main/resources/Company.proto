@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_package = "com.bonaparte.bean";
+
+option java_outer_classname = "CompanyProto";
+
+message Companys{
+    repeated Company companys = 1;
+    message Company{
+        int64 id = 1;
+	    string name = 2;
+	    int64 memberCount = 3;
+        repeated string aliasName = 4;
+    }
+}	
+	
