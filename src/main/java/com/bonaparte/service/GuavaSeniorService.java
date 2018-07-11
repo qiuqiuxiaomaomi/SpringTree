@@ -4,6 +4,7 @@ import com.bonaparte.bean.Champion;
 import com.bonaparte.bean.CompResult;
 import com.bonaparte.bean.Competition;
 import com.bonaparte.bean.UserInfo;
+import com.bonaparte.common.AcceptMethod;
 import com.bonaparte.dao.mapper.ChargeMapper;
 import com.bonaparte.entity.Charge;
 import com.google.common.base.Preconditions;
@@ -13,8 +14,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
  * Created by yangmingquan on 2018/6/29.
@@ -78,5 +81,14 @@ public class GuavaSeniorService {
                        .map(u ->u.getUserInfo())
                        .map(s ->s.getPhone())
                        .orElseThrow(() -> new IllegalArgumentException("This value of param comp is not available"));
+    }
+
+    public void consumerPrint(){
+        List<String> a1 = Arrays.asList("a", "b", "c", "d", "e");
+        a1.forEach(AcceptMethod::printValue);
+
+
+        Consumer<String> methodParam = AcceptMethod::printValue;
+        a1.forEach( x -> methodParam.accept(x));
     }
 }

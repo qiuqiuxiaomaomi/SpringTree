@@ -37,6 +37,7 @@ public class GuavaController {
         guavaSeniorService.optionalCheck(charge);
         Competition competition = new Competition();
         guavaSeniorService.optionalCheckMulti(competition);
+        guavaSeniorService.consumerPrint();
         return map;
     }
 }
