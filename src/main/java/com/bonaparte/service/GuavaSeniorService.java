@@ -71,7 +71,7 @@ public class GuavaSeniorService {
         throw new IllegalArgumentException("This value of param comp is not available");
     }
 
-    public String OptionalCheckMulti(Competition competition){
+    public String optionalCheckMulti(Competition competition){
         return Optional.of(competition)
                        .map(c ->c.getCompResult())
                        .map(r ->r.getChampion())

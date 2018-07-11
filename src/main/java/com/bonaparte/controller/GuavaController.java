@@ -1,5 +1,7 @@
 package com.bonaparte.controller;
 
+import com.bonaparte.bean.Competition;
+import com.bonaparte.entity.Charge;
 import com.bonaparte.service.GuavaSeniorService;
 import com.bonaparte.util.ControllerUtil;
 import io.swagger.annotations.Api;
@@ -30,6 +32,11 @@ public class GuavaController {
     public Object getDetail(){
         Map<String, Object> map = ControllerUtil.defaultSuccResult();
         guavaSeniorService.preconditionCheck(true, null, null, 1, 2);
+        guavaSeniorService.normalCheckMulti(new Competition());
+        Charge charge = new Charge(1, 345.6);
+        guavaSeniorService.optionalCheck(charge);
+        Competition competition = new Competition();
+        guavaSeniorService.optionalCheckMulti(competition);
         return map;
     }
 }
