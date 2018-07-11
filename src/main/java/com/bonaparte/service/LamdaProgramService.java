@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -23,13 +24,22 @@ public class LamdaProgramService {
     private ChargeMapper chargeMapper;
 
     public void lamdaProgram(){
-        List<Charge> list1 = chargeMapper.selectAll();
-        List<Charge> list2 = chargeMapper.selectAll();
+        List<Charge> list1 = new ArrayList<>();
+        List<Charge> list2 = new ArrayList<>();
+        for(int i = 0; i <= 2; i++){
+            Charge charge = new Charge(i, 23.0);
+            list1.add(charge);
+        }
+
+        for(int i = 0; i <= 2; i++){
+            Charge charge = new Charge(i+2, 23.0);
+            list2.add(charge);
+        }
         //惰性求值
         list1.stream().filter(x -> x.getStatus() == 1);
         //及早求值
         list1 = list1.stream()
-                .filter(x -> x.getStatus() == 1)
+                .filter(x -> x.getStatus() != 1)
                 .collect(Collectors.toList());
         list1.stream()
                 .parallel()
@@ -45,10 +55,11 @@ public class LamdaProgramService {
         //找出缴费最多的那个缴费记录
         list1.stream()
                 .max(Comparator.comparing(x->x.getMoney()))
-                .get();
+                .get().getMoney();
         list1.stream()
         //找出缴费最少的那个缴费记录
-                .min(Comparator.comparing(x->x.getMoney()));
+                .min(Comparator.comparing(x->x.getMoney()))
+                .get().getMoney();
         //判断是由有人缴费1块
         list1.stream()
                 .anyMatch(x->x.getMoney()==1);
@@ -80,5 +91,10 @@ public class LamdaProgramService {
                     chargeTemp.setMoney((double) x);
                     chargeList.add(chargeTemp);
                 });
+    }
+
+    public void consumerBasic() {
+        Consumer c = (str) -> System.out.println(str + "home");
+        c.accept("GitHub");
     }
 }
