@@ -31,6 +31,7 @@ public class LamdaController {
         Map<String, Object> map = ControllerUtil.defaultSuccResult();
         lamdaProgramService.lamdaProgram();
         lamdaProgramService.consumerBasic();
+        lamdaProgramService.lamdaPredicate();
         return map;
     }
 }

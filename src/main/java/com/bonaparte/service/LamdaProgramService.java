@@ -2,14 +2,17 @@ package com.bonaparte.service;
 
 import com.bonaparte.dao.mapper.ChargeMapper;
 import com.bonaparte.entity.Charge;
+import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 import org.apache.commons.lang.math.IntRange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -96,5 +99,18 @@ public class LamdaProgramService {
     public void consumerBasic() {
         Consumer c = (str) -> System.out.println(str + "home");
         c.accept("GitHub");
+    }
+
+    public void eval(List<Integer> list, Predicate<Integer> predicate){
+        for (Integer n:list){
+            if (predicate.test(n)){
+                System.out.println(n);
+            }
+        }
+    }
+
+    public void lamdaPredicate(){
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        eval(list, x -> x >3);
     }
 }
