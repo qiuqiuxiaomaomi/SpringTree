@@ -29,7 +29,7 @@ public class RxJavaController{
     @RequestMapping("/info")
     public Object rxjavaInfo(){
         Map<String, Object> map = ControllerUtil.defaultSuccResult();
-
+        rxJavaService.rxJavaCheck();
         return map;
     }
 }

@@ -3,6 +3,7 @@ package com.bonaparte.service;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.JedisCommands;
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +17,7 @@ import java.util.concurrent.locks.Lock;
  *   2：zookeeper实现分布式锁
  *
  */
+@Service
 public class LockService implements Lock, Watcher {
     @Value("${zookeeper.ip}")
     private String zookeeperConfig;
