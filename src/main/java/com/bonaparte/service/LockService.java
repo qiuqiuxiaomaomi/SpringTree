@@ -41,6 +41,10 @@ public class LockService implements Lock, Watcher {
         return null;
     }
 
+    public String redisGet(String key){
+        return jedis.get(key);
+    }
+
     /**
      * 利用Zookeeper实现分布式锁
      * */
