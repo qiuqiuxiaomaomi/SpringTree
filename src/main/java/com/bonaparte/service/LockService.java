@@ -19,7 +19,7 @@ import java.util.concurrent.locks.Lock;
  */
 @Service
 public class LockService implements Lock, Watcher {
-    @Value("${zookeeper.ip}")
+    @Value("${zookeeper.servers}")
     private String zookeeperConfig;
 
     @Resource(name = "jedisCluster")
