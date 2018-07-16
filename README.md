@@ -14,6 +14,7 @@
     fork/join
     ThreadPool
     微信支付
+    Elasticsearch
 </pre>
 
 ### 1:微信支付，暂时只支持公众号网页（调用微信客户端）支付，不支持二维码扫码支付 
@@ -63,3 +64,6 @@
 ### 22 RxJava 线程间通信框架
 ### 23:Kafka/Rocketmq 消息
 ### 24 Kaptcha 验证码功能
+### 25:Es搜索
+### 26:Mybatis 
+         1：一级缓存，二级缓存
