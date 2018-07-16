@@ -1,5 +1,7 @@
 package com.bonaparte.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 /**
@@ -7,4 +9,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SpringSeniorService {
+
+    //@Lazy解决循环依赖的问题
+    @Autowired
+    private MongoSeniorService mongoSeniorService;
+    @Autowired
+    @Lazy
+    private RedisSeniorService redisSeniorService;
 }
