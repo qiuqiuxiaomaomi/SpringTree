@@ -403,6 +403,12 @@
             <artifactId>kafka-clients</artifactId>
             <version>0.10.2.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.2.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
