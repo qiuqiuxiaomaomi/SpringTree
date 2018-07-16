@@ -19,6 +19,7 @@ import java.util.Map;
  *  Mysql的连接池
  *  Mysql的执行计划，执行计划的优化
  *  Mysql的缓存
+ *  Mysql Router: http://shift-alt-ctrl.iteye.com/blog/2399464
  */
 @Service
 public class MysqlSeniorService {

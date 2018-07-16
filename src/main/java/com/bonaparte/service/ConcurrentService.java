@@ -19,6 +19,9 @@ import java.util.Set;
 
 /**
  * Created by yangmingquan on 2018/7/1.
+ * CyclicBarrier
+ * ReentrantReadWriteLock可重入读-写锁
+ * Condtion await
  */
 @Service
 public class ConcurrentService {

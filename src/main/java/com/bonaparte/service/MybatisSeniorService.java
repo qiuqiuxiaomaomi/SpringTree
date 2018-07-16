@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Created by yangmingquan on 2018/6/29.
  * Mybatis 高级功能
+ * 自定义TypeHandler
  */
 @Service
 public class MybatisSeniorService {
