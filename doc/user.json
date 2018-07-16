@@ -1,0 +1,60 @@
+{
+  "properties": {
+    "id": {
+      "type": "long"
+    },
+    "name": {
+      "type": "text",
+      "similarity": "BM25",
+      "fields": {
+        "like": {
+          "type": "text",
+          "analyzer": "artist_name_like_analyzer"
+        },
+        "only": {
+          "type": "text",
+          "analyzer": "artist_name_only_analyzer"
+        },
+        "pinyin": {
+          "type": "text",
+          "analyzer": "pinyin_analyzer"
+        }
+      },
+      "analyzer": "artist_name_analyzer"
+    },
+    "ename": {
+      "type": "text",
+      "similarity": "BM25",
+      "fields": {
+        "like": {
+          "type": "text",
+          "analyzer": "artist_name_like_analyzer"
+        },
+        "only": {
+          "type": "text",
+          "analyzer": "artist_name_only_analyzer"
+        },
+        "pinyin": {
+          "type": "text",
+          "analyzer": "pinyin_analyzer"
+        }
+      },
+      "analyzer": "artist_name_analyzer"
+    },
+    "imgMd5": {
+      "type": "keyword"
+    },
+    "utime": {
+      "type": "long"
+    },
+    "ctime": {
+      "type": "long"
+    },
+    "location": {
+      "type": "keyword"
+    },
+    "status": {
+      "type": "integer"
+    }
+  }
+}
