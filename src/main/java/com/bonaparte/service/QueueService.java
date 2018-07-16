@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by yangmingquan on 2018/7/2.
  * 队列
+ * MpscLinkedQueue
  */
 @Service
 public class QueueService {

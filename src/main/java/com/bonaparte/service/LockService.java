@@ -15,6 +15,7 @@ import java.util.concurrent.locks.Lock;
  * 当前采取如下两种方式实现分布式锁，后续会增加更多
  *   1: redis 实现分布式锁
  *   2：zookeeper实现分布式锁
+ *   CAS、乐观锁与悲观锁、数据库相关锁机制、分布式锁、偏向锁、轻量级锁、重量级锁、monitor、锁优化、锁消除、锁粗化、自旋锁、可重入锁、阻塞锁、死锁
  *
  */
 @Service
