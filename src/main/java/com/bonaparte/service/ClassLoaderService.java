@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 /**
  * Created by yangmingquan on 2018/7/16.
  * Java 的类加载机制
+ *   1：双亲委派模型  2：双亲委派模型的破坏
  */
 @Service
 public class ClassLoaderService {
