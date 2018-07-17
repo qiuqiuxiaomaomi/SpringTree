@@ -1,5 +1,6 @@
 package com.bonaparte.service;
 
+import com.bonaparte.Ponaparte;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,4 +10,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClassLoaderService {
 
+    public void testClassLoader(){
+        ClassLoader classLoader = ClassLoaderService.class.getClassLoader();
+        System.out.println(classLoader);
+        System.out.println(classLoader.getParent());
+        System.out.println(classLoader.getParent().getParent());
+
+        ClassLoader classLoader1 = Ponaparte.class.getClassLoader();
+        System.out.println(classLoader1);
+        System.out.println(classLoader1.getParent());
+        System.out.println(classLoader1.getParent().getParent());
+    }
 }
