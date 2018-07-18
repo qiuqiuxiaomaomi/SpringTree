@@ -5,8 +5,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bonaparte.constant.TencentCloudProps;
 import com.bonaparte.util.TencentCloudUtil;
+import com.google.common.collect.Lists;
 import org.apache.commons.collections.map.HashedMap;
-import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,13 +33,51 @@ public class FaceCheckService {
      * 人脸检测
      * param: 图片名称：MD5值
      * */
-    public Object faceCheck(String imgMd5) throws Exception {
+    public Object faceCheck(String imgAMd5) throws Exception {
         Map<String, Object> param = new HashedMap();
-        param.put("appid", tencentCloudProps.getAppId()+"");
+        param.put("appid", "1257128504");
         param.put("mode", 1);
         param.put("url", "https://ponaparte-1257128504.cos.ap-chengdu.myqcloud.com/123.jpg");
         Object object = jsonpPost(tencentCloudProps.getFacedetect(), JSONUtils.toJSONString(param));
         System.out.println(object);
+        return object;
+    }
+
+    /**
+     * 人脸相似度比较
+     * */
+    public Object faceCompare(String imgAMd5, String imgBMd5) throws Exception {
+        Map<String, Object> param = new HashedMap();
+        param.put("appid", tencentCloudProps.getAppId());
+        param.put("urlA", "https://ponaparte-1257128504.cos.ap-chengdu.myqcloud.com/123.jpg");
+        param.put("urlB", "https://ponaparte-1257128504.cos.ap-chengdu.myqcloud.com/456.jpg");
+        Object object = jsonpPost(tencentCloudProps.getFacecompare(), JSONUtils.toJSONString(param));
+        System.out.println(object);
+        return object;
+    }
+
+    public Object newPerson() throws Exception{
+        Map<String, Object> param = new HashedMap();
+        param.put("appid", tencentCloudProps.getAppId());
+        List<String> groupIds = Lists.newArrayList();
+        groupIds.add("ponaparte");
+        param.put("group_ids", groupIds);
+        param.put("person_id", "100003");
+        param.put("person_name", "杨钰莹");
+        param.put("url", "https://ponaparte-1257128504.cos.ap-chengdu.myqcloud.com/123.jpg");
+        Object object = jsonpPost(tencentCloudProps.getNewperson(), JSONUtils.toJSONString(param));
+        System.out.println(object);
+        return object;
+    }
+
+    public Object identifyPerson() throws Exception{
+        Map<String, Object> param = new HashedMap();
+        param.put("appid", tencentCloudProps.getAppId());
+        List<String> groupIds = Lists.newArrayList();
+        groupIds.add("ponaparte");
+        param.put("group_ids", groupIds);
+        param.put("url", "https://ponaparte-1257128504.cos.ap-chengdu.myqcloud.com/112.jpg");
+        Object object = jsonpPost(tencentCloudProps.getIdentify(), JSONUtils.toJSONString(param));
         return object;
     }
 

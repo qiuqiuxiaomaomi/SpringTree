@@ -15,6 +15,13 @@ public class TencentCloudProps {
     public String secretId;
     public String secretKey;
     public String bucketName;
+    private String facecompare;
+    private String faceBaseUrl;
+    private String newperson;
+    private String personinfo;
+    private String setpersoninfo;
+    private String identify;
+
 
     public String getFacedetect() {
         return facedetect;
@@ -62,5 +69,53 @@ public class TencentCloudProps {
 
     public void setBucketName(String bucketName) {
         this.bucketName = bucketName;
+    }
+
+    public String getFacecompare() {
+        return facecompare;
+    }
+
+    public void setFacecompare(String facecompare) {
+        this.facecompare = facecompare;
+    }
+
+    public String getFaceBaseUrl() {
+        return faceBaseUrl;
+    }
+
+    public void setFaceBaseUrl(String faceBaseUrl) {
+        this.faceBaseUrl = faceBaseUrl;
+    }
+
+    public String getNewperson() {
+        return newperson;
+    }
+
+    public void setNewperson(String newperson) {
+        this.newperson = newperson;
+    }
+
+    public String getPersoninfo() {
+        return personinfo;
+    }
+
+    public void setPersoninfo(String personinfo) {
+        this.personinfo = personinfo;
+    }
+
+    public String getSetpersoninfo() {
+        return setpersoninfo;
+    }
+
+    public void setSetpersoninfo(String setpersoninfo) {
+        this.setpersoninfo = setpersoninfo;
+    }
+
+    public String getIdentify() {
+        return identify;
+    }
+
+    public void setIdentify(String identify) {
+        this.identify = identify;
     }
 }
