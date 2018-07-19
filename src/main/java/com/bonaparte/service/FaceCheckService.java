@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bonaparte.constant.TencentCloudProps;
 import com.bonaparte.util.TencentCloudUtil;
 import com.google.common.collect.Lists;
+import com.squareup.okhttp.*;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,10 +17,17 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.charset.Charset;
+import java.rmi.ServerException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by yangmingquan on 2018/7/18.
@@ -81,7 +89,10 @@ public class FaceCheckService {
         return object;
     }
 
-    /**执行请求*/
+    /**
+     * 执行请求
+     * url, 使用腾讯云的bucket 文件引用的形式
+     * */
     public Object jsonpPost(String path, String str){
         Object body = null;
         try{
@@ -112,5 +123,77 @@ public class FaceCheckService {
             throw new RuntimeException("请求es数据失败");
         }
         return body;
+    }
+
+    private void setMultiPartEntity(MultipartBuilder multipartBuilder, Map<String, Object> params, Map<String, File> files, Map<String, byte[]> fileContents)
+            throws FileNotFoundException {
+
+        multipartBuilder.type(MultipartBuilder.FORM);
+        for (String paramKey : params.keySet()) {
+            multipartBuilder.addFormDataPart(paramKey, String.valueOf(params.get(paramKey)));
+        }
+
+        if (files.size() > 0) {
+            for (String key : files.keySet()) {
+                File file = files.get(key);
+                if (file == null) {
+                    throw new FileNotFoundException("File is null: " + key);
+                }
+                if (!file.exists()) {
+                    throw new FileNotFoundException("File Not Exists: " + file.getAbsolutePath());
+                }
+                multipartBuilder.addPart(
+                        Headers.of("Content-Disposition", String.format("form-data; name=\"%s\"; filename=\"%s\"", key, file.getName())),
+                        RequestBody.create(MediaType.parse("image/jpg"), file)
+                );
+            }
+        }
+    }
+
+    /**
+     * Multipart/format 格式图片的检索
+     * */
+    protected Object sendPostRequest(String path, Map<String, Object> map, MultipartFile file) throws Exception {
+        Object object = new Object();
+        OkHttpClient mOkHttpClient = new OkHttpClient();
+        mOkHttpClient.setConnectTimeout(10000, TimeUnit.MILLISECONDS);
+        mOkHttpClient.setReadTimeout(10000, TimeUnit.MILLISECONDS);
+        mOkHttpClient.setWriteTimeout(10000,TimeUnit.MILLISECONDS);
+        String authorization = TencentCloudUtil.appSign(Integer.valueOf(tencentCloudProps.getAppId()),
+                tencentCloudProps.getSecretId(),
+                tencentCloudProps.getSecretKey(),
+                tencentCloudProps.getBucketName(),
+                0);
+        Map<String, String> headers = new HashedMap();
+        headers.put("host", "recognition.image.myqcloud.com");
+        headers.put("content-type", "multipart/form-data");
+        headers.put("authorization", authorization);
+        File lf = new File("E:\\pictures\\" + System.currentTimeMillis() + ".jpg");
+        file.transferTo(lf);
+        HashMap<String, File> imageList = new HashMap<>();
+        imageList.put("image", lf);
+        MultipartBuilder multipartBuilder = new MultipartBuilder();
+        setMultiPartEntity(multipartBuilder, map, imageList, null);
+        RequestBody requestBody = multipartBuilder.build();
+        Request.Builder requestBuilder = new Request.Builder()
+                .url(tencentCloudProps.getIdentify())
+                .post(requestBody);
+        for (String headerKey : headers.keySet()) {
+            requestBuilder.addHeader(headerKey, headers.get(headerKey));
+        }
+        Response response = null;
+        try {
+            response = mOkHttpClient.newCall(requestBuilder.build()).execute();
+        } catch (IOException e) {
+            throw new ServerException(e.getMessage());
+        }
+        String string = null;
+        try {
+            string = response.body().string();
+        } catch (IOException e) {
+            throw new ServerException(e.getMessage());
+        }
+        object = JSONObject.parseObject(string);
+        return object;
     }
 }
