@@ -41,7 +41,7 @@ public class FaceCheckService {
      * 人脸检测
      * param: 图片名称：MD5值
      * */
-    public Object faceCheck(String imgAMd5) throws Exception {
+    public Object faceCheck(MultipartFile file) throws Exception {
         Map<String, Object> param = new HashedMap();
         param.put("appid", "1257128504");
         param.put("mode", 1);
@@ -54,7 +54,7 @@ public class FaceCheckService {
     /**
      * 人脸相似度比较
      * */
-    public Object faceCompare(String imgAMd5, String imgBMd5) throws Exception {
+    public Object faceCompare(MultipartFile fileA, MultipartFile fileB) throws Exception {
         Map<String, Object> param = new HashedMap();
         param.put("appid", tencentCloudProps.getAppId());
         param.put("urlA", "https://ponaparte-1257128504.cos.ap-chengdu.myqcloud.com/123.jpg");
@@ -64,7 +64,7 @@ public class FaceCheckService {
         return object;
     }
 
-    public Object newPerson() throws Exception{
+    public Object newPerson(MultipartFile file) throws Exception{
         Map<String, Object> param = new HashedMap();
         param.put("appid", tencentCloudProps.getAppId());
         List<String> groupIds = Lists.newArrayList();
@@ -78,7 +78,7 @@ public class FaceCheckService {
         return object;
     }
 
-    public Object identifyPerson() throws Exception{
+    public Object identifyPerson(MultipartFile file) throws Exception{
         Map<String, Object> param = new HashedMap();
         param.put("appid", tencentCloudProps.getAppId());
         List<String> groupIds = Lists.newArrayList();
