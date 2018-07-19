@@ -72,3 +72,5 @@
 ### 29:Mycat
 ### 30:Groovy
 ### 31:Tencent云人脸检测，人脸识别功能
+    基于对象存储桶imgUrl的检测
+    基于图片对象image的检测
