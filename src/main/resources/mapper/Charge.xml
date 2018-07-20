@@ -18,4 +18,13 @@
         <result column="description" property="description" jdbcType="VARCHAR"/>
         <result column="order_id" property="orderId" jdbcType="VARCHAR"/>
     </resultMap>
+
+    <insert id="insertChargeBatch" parameterType="java.util.List">
+        replace into p_charge(name, money, ctime, utime, status, charge_time, type, uid, description)
+        values
+        <foreach collection="list" separator="," open="(" item="item" close=")" index="index">
+            (#{item.name}, #{item.money}, #{item.ctime}, #{item.utime}, #{item.status}, #{item.charge_time},
+            #{item.type}, #{item.uid}, #{item.description})
+        </foreach>
+    </insert>
 </mapper>
