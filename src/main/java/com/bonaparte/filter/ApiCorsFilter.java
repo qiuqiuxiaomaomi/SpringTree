@@ -6,7 +6,7 @@ import java.io.IOException;
 
 /**
  * Created by yangmingquan on 2018/6/29.
- * 增加Filter的执行顺序设置
+ * 自定义Filter, 增加Filter的执行顺序设置
  */
 public class ApiCorsFilter implements Filter {
     public ApiCorsFilter() {
