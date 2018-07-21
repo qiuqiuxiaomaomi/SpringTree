@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.rmi.PortableRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +30,6 @@ import java.util.stream.Collectors;
  * Created by yangmingquan on 2018/7/16.
  */
 @Configuration
-@EnableConfigurationProperties(RocketmqProps.class)
 public class RocketMqConfig{
     private final static Log log = LogFactory.getLog(GuavaSeniorService.class);
     @Autowired
@@ -73,11 +73,12 @@ public class RocketMqConfig{
             consumer.setMessageModel(MessageModel.BROADCASTING);
         }
         consumer.setConsumeMessageBatchMaxSize(
-                rocketmqProps.getConsumerBatchMaxSize() == 0 ? 1 : rocketmqProps.getConsumerBatchMaxSize());// 设置批量消费，以提升消费吞吐量，默认是1
+                Integer.valueOf(rocketmqProps.getConsumerBatchMaxSize()) == 0 ? 1 : Integer.valueOf(rocketmqProps.getConsumerBatchMaxSize()));// 设置批量消费，以提升消费吞吐量，默认是1
         /**
          * 订阅指定topic下tags
          */
-        List<String> subscribeList = rocketmqProps.getSubscribe();
+        //List<String> subscribeList = rocketmqProps.getSubscribe();
+        List<String> subscribeList = new ArrayList<>();
         for (String sunscribe : subscribeList) {
             consumer.subscribe(sunscribe.split(":")[0], sunscribe.split(":")[1]);
         }

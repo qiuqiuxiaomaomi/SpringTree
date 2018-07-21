@@ -11,7 +11,7 @@ import java.util.List;
  * Created by yangmingquan on 2018/7/16.
  */
 @Configuration
-@ConfigurationProperties(prefix = "ponaparte.rocketmq")
+@ConfigurationProperties(prefix = "rocketmq")
 public class RocketmqProps {
     private String namesrvAddr;
     private String producerGroupName;
@@ -20,11 +20,10 @@ public class RocketmqProps {
     private String producerInstanceName;
     private String consumerInstanceName;
     private String transactionProducerInstanceName;
-    private Integer consumerBatchMaxSize;
+    private String consumerBatchMaxSize;
     private boolean consumerBroadcasting;
     private boolean enableHisConsumer;
     private boolean enableOrderConsumer;
-    private List subscribe = new ArrayList<>();
 
     public String getNamesrvAddr() {
         return namesrvAddr;
@@ -82,14 +81,6 @@ public class RocketmqProps {
         this.transactionProducerInstanceName = transactionProducerInstanceName;
     }
 
-    public Integer getConsumerBatchMaxSize() {
-        return consumerBatchMaxSize;
-    }
-
-    public void setConsumerBatchMaxSize(Integer consumerBatchMaxSize) {
-        this.consumerBatchMaxSize = consumerBatchMaxSize;
-    }
-
     public boolean isConsumerBroadcasting() {
         return consumerBroadcasting;
     }
@@ -114,11 +105,11 @@ public class RocketmqProps {
         this.enableOrderConsumer = enableOrderConsumer;
     }
 
-    public List getSubscribe() {
-        return subscribe;
+    public String getConsumerBatchMaxSize() {
+        return consumerBatchMaxSize;
     }
 
-    public void setSubscribe(List subscribe) {
-        this.subscribe = subscribe;
+    public void setConsumerBatchMaxSize(String consumerBatchMaxSize) {
+        this.consumerBatchMaxSize = consumerBatchMaxSize;
     }
 }
