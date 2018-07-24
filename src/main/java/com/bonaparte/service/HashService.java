@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by yangmingquan on 2018/7/1.
  * HashMap（非线程安全）， Concurrent有很多锁（使用锁分段技术，每一段一把锁，大大的提高程序的并发性能，安全性）
+ * Hash code 的计算，Hash的自增长
  */
 @Service
 public class HashService {

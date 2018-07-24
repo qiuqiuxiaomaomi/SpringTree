@@ -31,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by yangmingquan on 2018/7/18.
+ * Tencent云人脸识别，包含 基于腾讯云bucket桶图片的识别，以及图片对象的识别，人脸的检索，人脸的识别，人脸的比对
  */
 @Service
 public class FaceCheckService {
