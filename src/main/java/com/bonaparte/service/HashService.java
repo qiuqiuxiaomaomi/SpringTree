@@ -26,4 +26,14 @@ public class HashService {
             x.setValue(x.getValue() + 10);
         });
     }
+
+    /**
+     * 模拟Hashmap的扩容过程
+     * 扩容需要重新计算hash
+     * 扩容与Treemap二叉树
+     * 扩容与负载因子
+     */
+    public void HashMapResize(){
+
+    }
 }
