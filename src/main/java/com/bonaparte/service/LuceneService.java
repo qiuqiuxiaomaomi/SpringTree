@@ -40,7 +40,7 @@ public class LuceneService {
     private IndexSearcher indexSearcher;
 
     @PostConstruct
-    public void setUp() throws IOException {
+    public void init() throws IOException {
 
         //索引存放的位置，设置在当前目录中
         directory = FSDirectory.open(Paths.get("indexDir/"));

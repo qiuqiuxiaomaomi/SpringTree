@@ -4,6 +4,8 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.bonaparte.filter.ApiCorsFilter;
 import com.bonaparte.filter.StatisticsFilter;
+import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.google.code.kaptcha.util.Config;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,12 +15,14 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by yangmingquan on 2018/6/29.
@@ -98,5 +102,32 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setDefaultEncoding("UTF-8");
         return multipartResolver;
+    }
+
+    @Bean
+    public DefaultKaptcha captchaProducer(){
+        DefaultKaptcha captchaProducer =new DefaultKaptcha();
+        Properties properties =new Properties();
+        properties.setProperty("kaptcha.border","yes");
+        properties.setProperty("kaptcha.border.color","105,179,90");
+        properties.setProperty("kaptcha.textproducer.font.color","blue");
+        properties.setProperty("kaptcha.image.width","100");
+        properties.setProperty("kaptcha.image.height","40");
+        properties.setProperty("kaptcha.textproducer.font.size","32");
+        properties.setProperty("kaptcha.session.key","code");
+        properties.setProperty("kaptcha.textproducer.char.length","4");
+        properties.setProperty("kaptcha.textproducer.font.names","宋体,楷体,微软雅黑");
+        Config config=new Config(properties);
+        captchaProducer.setConfig(config);
+        return  captchaProducer;
+    }
+
+    // 设置跨域访问
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "TRACE")
+                .allowCredentials(true);
     }
 }

@@ -26,7 +26,7 @@ import java.util.concurrent.locks.Lock;
 @Service
 public class ZookeeperLock implements Lock, Watcher{
     //@Value("${zookeeper.servers}")
-    private String zookeeperServers = "10.25.193.113:20881";
+    private String zookeeperServers = "10.25.193.114:20881";
 
     private ZooKeeper zk;
     private String root = "/locks";//根
@@ -34,30 +34,30 @@ public class ZookeeperLock implements Lock, Watcher{
     private String waitNode;//等待前一个锁
     private String myZnode;//当前锁
     private CountDownLatch latch;//计数器
-    private CountDownLatch connectedSignal=new CountDownLatch(1);
+    private CountDownLatch connectedSignal=new CountDownLatch(0);
     private int sessionTimeout = 30000;
     /**
      * 创建分布式锁,使用前请确认config配置的zookeeper服务可用
      * **/
-    public ZookeeperLock(){
-        this.lockName = "DistributionLock";
-        // 创建一个与服务器的连接
-        try {
-            zk = new ZooKeeper(zookeeperServers, sessionTimeout, this);
-            connectedSignal.await();
-            Stat stat = zk.exists(root, false);//此去不执行 Watcher
-            if(stat == null){
-                // 创建根节点
-                zk.create(root, new byte[0], ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
-            }
-        } catch (IOException e) {
-            throw new LockException(e);
-        } catch (KeeperException e) {
-            throw new LockException(e);
-        } catch (InterruptedException e) {
-            throw new LockException(e);
-        }
-    }
+//    public ZookeeperLock(){
+//        this.lockName = "DistributionLock";
+//        // 创建一个与服务器的连接
+//        try {
+//            zk = new ZooKeeper(zookeeperServers, sessionTimeout, this);
+//            connectedSignal.await();
+//            Stat stat = zk.exists(root, false);//此去不执行 Watcher
+//            if(stat == null){
+//                // 创建根节点
+//                zk.create(root, new byte[0], ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
+//            }
+//        } catch (IOException e) {
+//            throw new LockException(e);
+//        } catch (KeeperException e) {
+//            throw new LockException(e);
+//        } catch (InterruptedException e) {
+//            throw new LockException(e);
+//        }
+//    }
     /**
      * zookeeper节点的监视器
      */

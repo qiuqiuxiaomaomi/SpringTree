@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Map;
 
@@ -23,8 +24,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/lucene")
 public class LuceneController {
-    @Autowired
-    private LuceneService luceneService;
+//    @Resource
+//    private LuceneService luceneService;
 
     @ApiOperation(value = "Lucene操作接口",notes = "Lucene操作接口",httpMethod = "GET")
     @ApiResponses(value = {
@@ -33,16 +34,16 @@ public class LuceneController {
     @RequestMapping("/info")
     public Object luceneInfo() throws IOException, ParseException, InvalidTokenOffsetsException {
         Map<String, Object> map = ControllerUtil.defaultSuccResult();
-        luceneService.indexWriter();
-        luceneService.queryCheck("成都");
-        luceneService.multiQuery();
-        luceneService.prefixQuery();
-        luceneService.fuzzyQuery();
-        luceneService.wildcardQuery();
-        luceneService.queryParser();
-        luceneService.multiFieldQueryParse();
-        luceneService.highlighter();
-        luceneService.analyzerCN();
+//        luceneService.indexWriter();
+//        luceneService.queryCheck("成都");
+//        luceneService.multiQuery();
+//        luceneService.prefixQuery();
+//        luceneService.fuzzyQuery();
+//        luceneService.wildcardQuery();
+//        luceneService.queryParser();
+//        luceneService.multiFieldQueryParse();
+//        luceneService.highlighter();
+//        luceneService.analyzerCN();
         return map;
     }
 }
