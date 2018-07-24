@@ -54,9 +54,11 @@
 ### 15:Queue队列
     1:消费者/生产者模型
 ### 16:Mybatis
-     注解，缓存等
+    1:一级缓存，二级缓存
+    2:Mybatis的内置TypeHandler
+    3:注解
 ### 17:Aop功能
-     设置优先级的Aop拦截功能
+    设置优先级的Aop拦截功能
 ### 18:Memcached Nosql数据库
     1:Memcached客户端的负载均衡
 ### 19:Quartz定时任务
@@ -68,9 +70,6 @@
 ### 23:Kafka/Rocketmq 消息
 ### 24 Kaptcha 验证码功能
 ### 25:Es搜索
-### 26:Mybatis 
-    1：一级缓存，二级缓存
-    2：Mybatis的内置TypeHandler
 ### 27:泛型编程
 ### 28:编解码
 ### 29:Mycat
