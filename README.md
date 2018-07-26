@@ -34,6 +34,7 @@
      redis
      zookeeper
 ### 8:mongodb
+     多数据源配置
      文档数据库
      基础查询
      保存数据到磁盘
