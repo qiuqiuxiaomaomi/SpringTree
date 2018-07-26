@@ -40,7 +40,7 @@
      创建索引等
 ### 9:synchronized
      临界区间
-### 10:Transactional事务
+### 10:Transactional本地事务
      事务的传播属性
      事务的隔离级别
      事务的回滚策略 
@@ -91,4 +91,9 @@
       扩容需要重新计算hash
       扩容与Treemap二叉树
       扩容与负载因子
-### 37:Java原生持久化层JPA      
+### 37:Java原生持久化层JPA
+### 38:java全局事务（分布式事务）
+    Jta
+    XA
+    2PC
+    Tcc
