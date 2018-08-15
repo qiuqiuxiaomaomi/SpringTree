@@ -98,3 +98,4 @@
     XA
     2PC
     Tcc
+### 39:Mysql分库分表    
