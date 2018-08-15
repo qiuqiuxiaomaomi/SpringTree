@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 
 /**
  * Created by yangmingquan on 2018/7/21.
+ * Servlet技术
  */
 @WebServlet(urlPatterns = "/bonaparte/*")
 public class BonaparteServelet extends HttpServlet{
