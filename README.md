@@ -98,4 +98,5 @@
     XA
     2PC
     Tcc
-### 39:Mysql分库分表    
+### 39:Mysql分库分表
+### 40:Elevator电梯算法
