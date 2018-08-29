@@ -1,16 +1,19 @@
 package com.bonaparte.service;
 
+import com.bonaparte.bean.StatisticBean;
 import com.bonaparte.dao.mapper.ChargeMapper;
 import com.bonaparte.dao.mapper.KeyWordMapper;
 import com.bonaparte.entity.Charge;
 import com.bonaparte.entity.KeyWord;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by yangmingquan on 2018/6/29.
@@ -125,5 +128,90 @@ public class MybatisSeniorService {
         KeyWordMapper keyWordMapper = sqlSession.getMapper(KeyWordMapper.class);
         List<KeyWord> keyWordList = keyWordMapper.selectAll();
         //keyWordList1 与 keyWordList 是一致的
+    }
+
+    /**
+     * 使用内存排序
+     * */
+    public Map<String, Object> statisticInfoDetail(StatisticBean bean){
+        Map<String, Object> mapResult = new HashedMap();
+        List<Map<String, Object>> mapList = new ArrayList<>();
+        List<Integer> orgIds = new ArrayList<>();
+
+        /**
+         * 具体业务省略
+         * */
+
+        if(!CollectionUtils.isEmpty(mapList)){
+            //排序，分页
+            Collections.sort(mapList, new Comparator<Map<String, Object>>() {
+                @Override
+                public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+                    if (bean.getOrderPriority() == null) {
+                        if (StringUtils.length(o1.get("code").toString()) < StringUtils.length(o2.get("code").toString())) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    } else {
+                        if (bean.getOrderPriority() == 1){
+                            if (bean.getOrderByType() == 0){
+                                if (Long.valueOf(o1.get("count").toString()) >= Long.valueOf(o2.get("count").toString())){
+                                    return 1;
+                                } else {
+                                    return -1;
+                                }
+                            } else {
+                                if (Long.valueOf(o1.get("count").toString()) < Long.valueOf(o2.get("count").toString())){
+                                    return 1;
+                                } else {
+                                    return -1;
+                                }
+                            }
+                        } else if (bean.getOrderPriority() == 1){
+                            if (bean.getOrderByType() == 0){
+                                if (Long.valueOf(o1.get("forwardFriendCount").toString()) >= Long.valueOf(o2.get("forwardFriendCount").toString())){
+                                    return 1;
+                                } else {
+                                    return -1;
+                                }
+                            } else {
+                                if (Long.valueOf(o1.get("forwardFriendCount").toString()) < Long.valueOf(o2.get("forwardFriendCount").toString())){
+                                    return 1;
+                                } else {
+                                    return -1;
+                                }
+                            }
+                        } else {
+                            if (bean.getOrderByType() == 0){
+                                if (Long.valueOf(o1.get("forwardCircleCount").toString()) >= Long.valueOf(o2.get("forwardCircleCount").toString())){
+                                    return 1;
+                                } else {
+                                    return -1;
+                                }
+                            } else {
+                                if (Long.valueOf(o1.get("forwardCircleCount").toString()) < Long.valueOf(o2.get("forwardCircleCount").toString())){
+                                    return 1;
+                                } else {
+                                    return -1;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            //分页
+            if (bean.getStartRow() >= mapList.size()){
+                mapList = null;
+            } else {
+                if ((bean.getStartRow() + bean.getPageSize()) > mapList.size()){
+                    mapList = mapList.subList(bean.getStartRow(), mapList.size());
+                } else {
+                    mapList = mapList.subList(bean.getStartRow(), bean.getStartRow() + bean.getPageSize() - 1);
+                }
+            }
+        }
+        return mapResult;
     }
 }
