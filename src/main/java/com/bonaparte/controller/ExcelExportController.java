@@ -31,7 +31,7 @@ public class ExcelExportController {
         add(new ExcelExportEntity("性别", "sex"));
     }};
 
-    @ApiOperation(value = "用农户信息导出",notes = "用户信息导出",httpMethod = "GET")
+    @ApiOperation(value = "用户信息导出",notes = "用户信息导出",httpMethod = "GET")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "data", value = "用户信息导出", required = true, dataType = "String"),
     })
