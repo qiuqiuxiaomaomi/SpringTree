@@ -6,12 +6,20 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
@@ -82,5 +90,29 @@ public class HttpUtil {
         String info = new String(post.getResponseBody(),"gbk");
         logger.info("发送短信接口返回值为"+info);
         return info;
+    }
+
+    public static Object jsonPost(String path, String str){
+        Object body = null;
+        try{
+            CloseableHttpClient client = HttpClients.createDefault();
+            HttpPost post = new HttpPost(path);
+            String respContent = null;
+            StringEntity entity = new StringEntity( str, Charset.forName("UTF-8"));
+            entity.setContentEncoding("UTF-8");
+            entity.setContentType("application/json");
+            post.setEntity(entity);
+            HttpResponse resp = client.execute(post);
+            if(resp.getStatusLine().getStatusCode() == 200) {
+                HttpEntity he = resp.getEntity();
+                respContent = EntityUtils.toString(he, "UTF-8");
+            }
+            JSONObject resultJson = JSON.parseObject(respContent.toString());
+            body = resultJson.get("data");
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException("请求腾讯云失败");
+        }
+        return body;
     }
 }

@@ -2,6 +2,7 @@ package com.bonaparte.util;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.MessageDigest;
 import java.util.Base64;
 import java.util.Random;
 
@@ -60,5 +61,27 @@ public class TencentCloudUtil {
      */
     public static byte[] HmacSha1(String plainText, String key) throws Exception {
         return HmacSha1(plainText.getBytes(), key);
+    }
+
+    public static String getSHA(String str){
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(str.getBytes());
+            byte[] digest = md.digest();
+
+            StringBuffer hexstr = new StringBuffer();
+            String shaHex = "";
+            for (int i = 0; i < digest.length; i++) {
+                shaHex = Integer.toHexString(digest[i] & 0xFF);
+                if (shaHex.length() < 2) {
+                    hexstr.append(0);
+                }
+                hexstr.append(shaHex);
+            }
+            return hexstr.toString();
+        }catch (Exception e){
+            return null;
+        }
+
     }
 }
