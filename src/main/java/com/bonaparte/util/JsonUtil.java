@@ -1,10 +1,13 @@
 package com.bonaparte.util;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Sets;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.util.StringUtils;
 
 import java.util.Set;
 
@@ -37,5 +40,20 @@ public class JsonUtil {
             log.error("JsonUtil merge error, msg:" + e.getMessage(), e);
         }
         return merged;
+    }
+
+    public static JSONObject decode(String token) {
+        if(token != null && !StringUtils.isEmpty(token)) {
+            String[] components = token.split("\\.");
+            if(components != null && components.length == 3) {
+                String payloadBase64 = components[1];
+                String payloadJsonStr = new String(Base64.decode(payloadBase64));
+                return payloadJsonStr == null?null: JSON.parseObject(payloadJsonStr);
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }
