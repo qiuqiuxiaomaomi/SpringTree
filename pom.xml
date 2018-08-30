@@ -479,6 +479,13 @@
             <artifactId>spring-cloud-commons</artifactId>
             <version>1.2.3.RELEASE</version>
         </dependency>
+
+        <!--处理emotionji符号表情-->
+        <dependency>
+            <groupId>com.vdurmont</groupId>
+            <artifactId>emoji-java</artifactId>
+            <version>4.0.0</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

@@ -1,5 +1,6 @@
 package com.bonaparte.service;
 
+import com.vdurmont.emoji.EmojiParser;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +23,8 @@ public class StringService {
         StringUtils.trimToEmpty(a);
         StringUtils.containsIgnoreCase("abcdefgeee", "a");
         StringUtils.containsNone("aeeeggestt", "xyz");
+        // 处理符号表情
+        String content = EmojiParser.removeAllEmojis(str);
+        System.out.println(content);
     }
 }
