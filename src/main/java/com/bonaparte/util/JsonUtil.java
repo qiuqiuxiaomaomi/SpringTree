@@ -9,6 +9,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -55,5 +58,24 @@ public class JsonUtil {
         } else {
             return null;
         }
+    }
+
+    public static Map<String, Boolean> groupEquals(JSONObject json1, JSONObject json2, Map<String, List<String>> groupKeys) {
+        Map<String, Boolean> result = new HashMap<String, Boolean>();
+        for (String groupName : groupKeys.keySet()) {
+            JSONObject groupJson1 = new JSONObject();
+            JSONObject groupJson2 = new JSONObject();
+            List<String> keys = groupKeys.get(groupName);
+            for (String key : keys) {
+                groupJson1.put(key, json1.get(key));
+                groupJson2.put(key, json2.get(key));
+            }
+            if (groupJson1.equals(groupJson2)) {
+                result.put(groupName, true);
+            } else {
+                result.put(groupName, false);
+            }
+        }
+        return result;
     }
 }
