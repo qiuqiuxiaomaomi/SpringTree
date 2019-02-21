@@ -107,3 +107,17 @@
     2：内存分页
 ### 43:Excel的导入导出
 ### 45:Redisson实现分布式锁
+
+<pre>
+SpringBoot 2.0.0版本的重大改动
+
+      1) 基于Java8,支持Java9
+      2) 支持quartz调度程序
+      3）大大简化了安全自动配置
+      5）支持嵌入式Netty
+      6) Tomcat,Undertow和Jetty均支持HTTP/2
+      7) 使用Spring WebFlux提供响应式异步编程。
+      8）为各个组件的响应式编程提供了自动化配置，
+      9）引入Kotlin 1.2.x的支持。
+      10）启动时的 ASCII 图像 Spring Boot banner 现已支持 GIF
+</pre>
