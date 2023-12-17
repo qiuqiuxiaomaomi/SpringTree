@@ -16,7 +16,7 @@
             </snapshots>
             <id>public</id>
             <name>Public Repositories</name>
-            <url>http://git.karakal.com.cn:8090/nexus/content/groups/public/</url>
+            <url>https://git.karakal.com.cn:8090/nexus/content/groups/public/</url>
         </repository>
     </repositories>
 
@@ -24,7 +24,7 @@
         <pluginRepository>
             <id>public</id>
             <name>Public Repositories</name>
-            <url>http://git.karakal.com.cn:8090/nexus/content/groups/public/</url>
+            <url>https://git.karakal.com.cn:8090/nexus/content/groups/public/</url>
         </pluginRepository>
     </pluginRepositories>
 
